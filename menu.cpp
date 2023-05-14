@@ -35,6 +35,12 @@ void TextObject::render_text_texture()
     text_texture.render(gRenderer, text_rect.x, text_rect.y, NULL, &text_rect);
 }
 
+bool TextObject::is_press(int mouse_x, int mouse_y)
+{
+    return mouse_x >= text_rect.x && mouse_x <= text_rect.x + text_rect.w
+        && mouse_y >= text_rect.y && mouse_y <= text_rect.y + text_rect.h;
+}
+
 Button::Button(std::string _button_name, SDL_Rect _button_rect)
 {
     button_name = _button_name;

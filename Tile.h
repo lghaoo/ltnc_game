@@ -49,7 +49,7 @@ private:
     vector<Tile*> tile_set;
     SDL_Rect tile_clips[TOTAL_TILE_SPRITES];
     int level;
-    int x1 = -1, x2 = -1,y1 = -1,y2 = -1;
+    //int x1 = -1, x2 = -1,y1 = -1,y2 = -1;
 
     
     
@@ -61,14 +61,12 @@ public:
     vector<Tile*> get_tile_set() {return tile_set;};
     bool set_tiles(std::string file_path);
     void render(SDL_Rect& camera);
-    int get_pos_start_x_();
-    int get_pos_start_y_();
-    int get_pos_x_target();  
-    int get_pos_y_target(); 
+    
+    int getLevel() ;
     
 };
     
-//void get_position_start(Map level);
+
     
 
 

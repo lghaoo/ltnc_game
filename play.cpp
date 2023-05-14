@@ -5,9 +5,9 @@
 
 Play::Play()
 {
-    init();
+   
 }
-void Play::init()
+void Play::init(Map level_)
 {
     x_val = 0;
     y_val = 0;
@@ -15,9 +15,29 @@ void Play::init()
 
    mTexture.loadImg("img/right.png",gRenderer);
    if (mTexture.pTexture == NULL) std::cout<<1<<' ';
-    mBox = {62, 0 , PLAYER_WIDTH, PLAYER_HEIGHT};
-  
-  
+   switch (level_.getLevel())
+    {
+    case 1:
+        mBox = {0,620, PLAYER_WIDTH,PLAYER_HEIGHT};
+        break;
+    case 2:
+        mBox = {434,0,PLAYER_WIDTH,PLAYER_HEIGHT};
+        break;
+    case 3:
+        mBox = {310,620,PLAYER_WIDTH,PLAYER_HEIGHT};
+        break;
+    case 4:
+        mBox = {620,248,PLAYER_WIDTH,PLAYER_HEIGHT};
+        break;
+    case 5:
+        mBox = {310,62,PLAYER_WIDTH,PLAYER_HEIGHT};
+        break;
+    
+    default:
+        break;
+    }
+    
+   
     
 }
 
@@ -119,20 +139,66 @@ void Play::move(vector<Tile*> tiles, Map level) {
     mBox.x += x_val;
     
     if(touchesWall(mBox, tiles)) {
-        mBox.x -= x_val;
-        x_val = 0;
+       
+             mBox.x -= x_val;
+             x_val = 0;
+
+      
+     
+    }
+
+    if ( mBox.x < 0)
+    {
+        mBox.x = 0;
+    }
+    else if ( mBox.x + PLAYER_WIDTH > SCREEN_WIDTH)
+    {
+        mBox.x = SCREEN_WIDTH - PLAYER_WIDTH;
     }
 
     mBox.y += y_val;
   
     
     if(touchesWall(mBox, tiles)) {
-       mBox.y -= y_val;
-        y_val = 0;
+       
+             mBox.y -= y_val;
+              y_val = 0;
      
     }
-    
+    if ( mBox.y < 0)
+    {
+        mBox.y = 0;
+    }
+    else if ( mBox.y + PLAYER_WIDTH > SCREEN_WIDTH)
+    {
+        mBox.y = SCREEN_WIDTH - PLAYER_WIDTH;
+    }
 
+}
+
+int Play::hp(Map level)
+{
+
+}
+
+bool Play::check_target(vactor<Tile*>tiles,Map level)
+{
+    switch (level.getLevel())
+    {
+    case 1:
+    {
+        for (Tile* tile : tiles)
+        {
+            if (tile ->getType() == 6)
+            if ( checkCollision(mBox, tile->getBox)) 
+        }
+    }
+
+        break;
+    
+    default:
+        break;
+    }
 }
 
 void Play::render(SDL_Rect &des)
@@ -154,9 +220,10 @@ void Play::render(SDL_Rect &des)
     default:
         break;
    }
+   step = new TextObject(GREEN_COLOR,"step : ",{mBox.x + 5 ,mBox.y,20,20},20,"font/Southern.ttf");
+  mTexture.render(gRenderer,mBox.x, mBox.y,NULL,&mBox,0,NULL,SDL_FLIP_NONE);
+   step->render_text_texture();
   
-   
-  mTexture.render(gRenderer,mBox.x, mBox.y,&mBox);
   
     
 

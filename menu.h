@@ -24,6 +24,7 @@ class TextObject
     SDL_Rect get_rect() const {return text_rect;};
     std::string get_text() const {return text_string;};
     SDL_Color get_color() const {return text_color;};
+     bool is_press(int mouse_x, int mouse_y);
 
 };
 

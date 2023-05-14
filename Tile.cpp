@@ -215,51 +215,11 @@ void Map::render(SDL_Rect& camera) {
     for(Tile* tile : tile_set) {
         tile -> render(camera, tile_clips);
         
-        // if (tile->getType() == 10)
-        // {
-        //     x1 = tile ->getBox().x;
-        //     y1 = tile ->getBox().y;
-        //    // std::cout << "x1: " << x1 << ", y1: " << y1 << std::endl; // In giá trị của x1 và y1 để kiểm tra
-        // }
+        
     }
 }
 
-//Kiểm tra xem giá trị của x1 và y1 đã được cập nhật chưa trước khi trả về
-// int Map::get_pos_start_x_()  {
-//     if (x1 == -1) {
-//         std::cout << "Error: x1 has not been updated yet!" << std::endl;
-//     }
-//     return x1;
-// }
-
-// int Map::get_pos_start_y_()  {
-//     if (y1 == -1) {
-//         std::cout << "Error: y1 has not been updated yet!" << std::endl;
-//     }
-//     return y1;
-// }
-
-// void get_position_start(Map level)
-// {
-//     switch (level)
-//     {
-//     case 1:
-//         mBox = {0,620, PLAYER_WIDTH,PLAYER_HEIGHT};
-//         break;
-//     case 2:
-//         mBox = {434,0,PLAYER_WIDTH,PLAYER_HEIGHT};
-//         break;
-//     case 3:
-//         mBox = {310,620,PLAYER_WIDTH,PLAYER_HEIGHT};
-//         break;
-//     case 4:
-//         mBox = {620,248,PLAYER_WIDTH,PLAYER_HEIGHT};
-//         break;
-//     case 5:
-//         mBox = {310,62,PLAYER_WIDTH,PLAYER_HEIGHT};
-//         break;
-    
-//     default:
-//         break;
-//     }
-// }
+int Map::getLevel()
+{
+    return level;
+}

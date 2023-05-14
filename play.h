@@ -4,6 +4,7 @@
 #include "common.h"
 #include "BaseObject.h"
 #include "Tile.h"
+#include "menu.h"
 
 
 class Play
@@ -25,7 +26,7 @@ class Play
       static const int PLAYER_HEIGHT = 60;
       static const int PLAYER_SPEED = 5;
      
-    void init();
+    void init(Map level);
 
     void handleEvent(SDL_Event& e);
 
@@ -33,23 +34,22 @@ class Play
 
     
     void render(SDL_Rect &des);
+
+
     
   
     
 
     bool is_game_over(SDL_Rect camera);
 
-    bool win(Map level);
-
-    int pos_start(vector<Tile*> tiles, Map level);
-
+    bool win(vector<Tile*> tiles,Map level);
+    int hp(Map level);
     int getPosX();
     int getPosY();
    private:
    
     SDL_Rect mBox;
-
-    SDL_Rect current_clip;
+    TextObject *step;
    
     WaikType player_state;
     
@@ -57,7 +57,7 @@ class Play
   
     BaseObject mTexture;
     
-    SDL_RendererFlip player_flip;
+   
     
     
     
