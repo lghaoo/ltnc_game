@@ -49,6 +49,7 @@ Play::~Play()
 }
 void Play::handleEvent(SDL_Event &event)
 {
+   
     if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
     {
         switch (event.key.keysym.sym)
@@ -133,45 +134,24 @@ void Play::handleEvent(SDL_Event &event)
 }
 
 void Play::move(vector<Tile*> tiles, Map level) {
-    //Increase the velocity
     
-        
-    mBox.x += x_val;
-    
-    if(touchesWall(mBox, tiles)) {
-       
-             mBox.x -= x_val;
-             x_val = 0;
+     mBox.x += x_val;
 
-      
-     
-    }
-
-    if ( mBox.x < 0)
+    //If the dot went too far to the left or right or touched a wall
+    if( ( mBox.x < 0 ) || ( mBox.x + PLAYER_WIDTH > SCREEN_HEIGHT ) || touchesWall( mBox, tiles ) )
     {
-        mBox.x = 0;
-    }
-    else if ( mBox.x + PLAYER_WIDTH > SCREEN_WIDTH)
-    {
-        mBox.x = SCREEN_WIDTH - PLAYER_WIDTH;
+        //move back
+        mBox.x -= x_val;
     }
 
+    //Move the dot up or down
     mBox.y += y_val;
-  
-    
-    if(touchesWall(mBox, tiles)) {
-       
-             mBox.y -= y_val;
-              y_val = 0;
-     
-    }
-    if ( mBox.y < 0)
+
+    //If the dot went too far up or down or touched a wall
+    if( ( mBox.y < 0 ) || ( mBox.y + PLAYER_HEIGHT > SCREEN_HEIGHT ) || touchesWall( mBox, tiles ) )
     {
-        mBox.y = 0;
-    }
-    else if ( mBox.y + PLAYER_WIDTH > SCREEN_WIDTH)
-    {
-        mBox.y = SCREEN_WIDTH - PLAYER_WIDTH;
+        //move back
+        mBox.y -= y_val;
     }
 
 }
@@ -181,25 +161,25 @@ int Play::hp(Map level)
 
 }
 
-bool Play::check_target(vactor<Tile*>tiles,Map level)
-{
-    switch (level.getLevel())
-    {
-    case 1:
-    {
-        for (Tile* tile : tiles)
-        {
-            if (tile ->getType() == 6)
-            if ( checkCollision(mBox, tile->getBox)) 
-        }
-    }
+// bool Play::check_target(vector<Tile*>tiles,Map level)
+// {
+//     switch (level.getLevel())
+//     {
+//     case 1:
+//     {
+//         for (Tile* tile : tiles)
+//         {
+//             if (tile ->getType() == 6)
+//             if ( checkCollision(mBox, tile->getBox)) 
+//         }
+//     }
 
-        break;
+//         break;
     
-    default:
-        break;
-    }
-}
+//     default:
+//         break;
+//     }
+// }
 
 void Play::render(SDL_Rect &des)
 {

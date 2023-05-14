@@ -61,9 +61,7 @@ using namespace std;
       int mPosY;
  };
 
- int getNumLevel();
-
-
+ 
  bool checkCollision(SDL_Rect a, SDL_Rect b);
 
 extern vector<BaseObject> allTextures;

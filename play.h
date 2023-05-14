@@ -22,8 +22,8 @@ class Play
         WAIK_DOWN,
       };
 
-      static const int PLAYER_WIDTH = 60;
-      static const int PLAYER_HEIGHT = 60;
+      static const int PLAYER_WIDTH = 45;
+      static const int PLAYER_HEIGHT = 45;
       static const int PLAYER_SPEED = 5;
      
     void init(Map level);
