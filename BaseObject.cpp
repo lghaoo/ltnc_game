@@ -102,6 +102,12 @@ void BaseObject::render(SDL_Renderer *renderer, int x, int y, SDL_Rect *clip, SD
   SDL_RenderCopyEx(renderer, pTexture, clip, &renderQuad, -angle, center, flip);
 
 }
+
+bool BaseObject::is_press(int mouse_x, int mouse_y)
+{
+    return mouse_x >= mPosX && mouse_x <= mPosX + mWidth
+        && mouse_y >= mPosY && mouse_y <= mPosY + mHeight;
+}
 void BaseObject::renderCenter(SDL_Renderer *renderer, int x_center, int y_center,
                             int w, int h, SDL_Rect *clip, double angle,
                             SDL_Point *center, SDL_RendererFlip flip) {
@@ -138,9 +144,7 @@ void BaseObject :: free()
     }
 
 }
-void BaseObject::setAlpha(Uint8 alpha) {
-  SDL_SetTextureAlphaMod(pTexture, alpha);
-}
+
 bool checkCollision(SDL_Rect a, SDL_Rect b) {
   return SDL_HasIntersection(&a, &b);
 }
@@ -149,5 +153,3 @@ SDL_Renderer *gRenderer = NULL;
 TTF_Font* gFont[TOTAL_FONT] = {NULL, NULL, NULL, NULL, NULL};
 //Mix_Music *gMusic;
 // Level player are currently in
-int gLevel = 0;
-int gMenuID = 0;

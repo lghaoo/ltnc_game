@@ -38,28 +38,32 @@ class Play
 
     
   
-    
+    SDL_Rect get_target(vector<Tile*> tiles);
+
+   // void check_hp(vector<Tile*> tiles);
 
     bool is_game_over(SDL_Rect camera);
 
-    bool win(vector<Tile*> tiles,Map level);
-    int hp(Map level);
+    bool win();
+    int get_hp(Map level);
     int getPosX();
     int getPosY();
    private:
    
     SDL_Rect mBox;
-    TextObject *step;
+    TextObject *step, *hp_;
    
     WaikType player_state;
     
     float x_val, y_val;
   
     BaseObject mTexture;
-    
-   
-    
-    
+
+    SDL_Rect target;
+
+    int hp;
+
+    //Tile status_x;
     
 };
 

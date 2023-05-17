@@ -62,6 +62,48 @@ bool touchesWall( SDL_Rect box, vector<Tile*> tiles )
     return false;
 }
 
+void Tile::update_x1(bool x)
+{
+    x1 = x;
+}
+void Tile::update_x2(bool x)
+{
+    x2 = x;
+}
+void Tile::update_x3(bool x)
+{
+    x3 = x;
+}
+void Tile::update_x4(bool x)
+{
+    x4 = x;
+}
+void Tile::update_x5(bool x)
+{
+    x5 = x;
+}
+void Tile::update_x6(bool x)
+{
+    x6 = x;
+}
+void Tile::update_x7(bool x)
+{
+    x7 = x;
+}
+void Tile::update_x8(bool x)
+{
+    x8 = x;
+}
+void Tile::update_x9(bool x)
+{
+    x9 = x;
+}
+void Tile::update_x10(bool x)
+{
+    x10 = x;
+}
+
+
 Map::Map(int _level) {
     level = _level;
     switch(level) {
@@ -82,6 +124,8 @@ Map::Map(int _level) {
         default: break;
     }
 }
+
+
 
 bool Map::set_tiles(std::string file_path) {
         //Success flag
@@ -151,55 +195,15 @@ bool Map::set_tiles(std::string file_path) {
         //Clip the sprite sheet
         if( tilesLoaded )
         {
-            tile_clips[1].x = 0;
-            tile_clips[1].y = 0;
-            tile_clips[1].w = TILE_WIDTH;
-            tile_clips[1].h = TILE_HEIGHT;
+            
+            for (int i = 0 ; i < 10 ; i++)
+            {
+                tile_clips[i + 1].x = TILE_WIDTH*i;
+                tile_clips[i + 1].y = 0;
+                tile_clips[i + 1].w = TILE_WIDTH;
+                tile_clips[i + 1].h = TILE_HEIGHT;
 
-            tile_clips[2].x = TILE_WIDTH;
-            tile_clips[2].y = 0;
-            tile_clips[2].w = TILE_WIDTH;
-            tile_clips[2].h = TILE_HEIGHT;
-
-            tile_clips[3].x = TILE_WIDTH*2;
-            tile_clips[3].y = 0;
-            tile_clips[3].w = TILE_WIDTH;
-            tile_clips[3].h = TILE_HEIGHT;
-
-            tile_clips[4].x = TILE_WIDTH*3;
-            tile_clips[4].y = 0;
-            tile_clips[4].w = TILE_WIDTH;
-            tile_clips[4].h = TILE_HEIGHT;
-
-            tile_clips[5].x = TILE_WIDTH*4;
-            tile_clips[5].y = 0;
-            tile_clips[5].w = TILE_WIDTH;
-            tile_clips[5].h = TILE_HEIGHT;
-
-            tile_clips[6].x = TILE_WIDTH*5;
-            tile_clips[6].y = 0;
-            tile_clips[6].w = TILE_WIDTH;
-            tile_clips[6].h = TILE_HEIGHT;
-
-            tile_clips[7].x = TILE_WIDTH*6;
-            tile_clips[7].y = 0;
-            tile_clips[7].w = TILE_WIDTH;
-            tile_clips[7].h = TILE_HEIGHT;
-
-            tile_clips[8].x = TILE_WIDTH*7;
-            tile_clips[8].y = 0;
-            tile_clips[8].w = TILE_WIDTH;
-            tile_clips[8].h = TILE_HEIGHT;
-
-            tile_clips[9].x = TILE_WIDTH*8;
-            tile_clips[9].y = 0;
-            tile_clips[9].w = TILE_WIDTH;
-            tile_clips[9].h = TILE_HEIGHT;
-
-            tile_clips[10].x = TILE_WIDTH*9;
-            tile_clips[10].y = 0;
-            tile_clips[10].w = TILE_WIDTH;
-            tile_clips[10].h = TILE_HEIGHT;
+            }
         }
     }
 
@@ -210,12 +214,9 @@ bool Map::set_tiles(std::string file_path) {
     return tilesLoaded;
 }
 
-//In giá trị của x1 và y1 trong phương thức render để kiểm tra
 void Map::render(SDL_Rect& camera) {
     for(Tile* tile : tile_set) {
-        tile -> render(camera, tile_clips);
-        
-        
+        tile -> render(camera, tile_clips);   
     }
 }
 

@@ -41,14 +41,14 @@ bool TextObject::is_press(int mouse_x, int mouse_y)
         && mouse_y >= text_rect.y && mouse_y <= text_rect.y + text_rect.h;
 }
 
-Button::Button(std::string _button_name, SDL_Rect _button_rect)
+Button::Button(std::string _button_name, SDL_Rect _button_rect, std::string path)
 {
     button_name = _button_name;
     button_rect = {_button_rect.x,_button_rect.y,_button_rect.w+50,_button_rect.h +10};
 
     SDL_Rect text_rect = {button_rect.x + 20, button_rect.y + 5, _button_rect.w , _button_rect.h -5 };
     button_textbox = new TextObject(WHITE_COLOR, button_name, text_rect, 25, "font/Southern.ttf");
-    load_texture();
+    load_texture(path);
 
 }
 bool Button::is_press(int mouse_x, int mouse_y)
@@ -56,9 +56,9 @@ bool Button::is_press(int mouse_x, int mouse_y)
     return mouse_x >= button_rect.x && mouse_x <= button_rect.x + button_rect.w
         && mouse_y >= button_rect.y && mouse_y <= button_rect.y + button_rect.h;
 }
-void Button::load_texture()
+void Button::load_texture(std::string path)
 {
-    button_texture.loadImg("img/button0.png",gRenderer);
+    button_texture.loadImg(path,gRenderer);
 }
 
 void Button::render() {

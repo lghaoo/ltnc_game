@@ -7,7 +7,7 @@ using namespace std;
 
 Mix_Music* sound_background = NULL;
 Mix_Music* start_game = NULL;
-
+Mix_Music* game_win = NULL;
 Mix_Chunk* button_select_sound = NULL;
 
 
@@ -22,6 +22,11 @@ bool LoadMusic()
     }
     button_select_sound =Mix_LoadWAV("sound/meomeo.mp3");
     if (button_select_sound == NULL)
+    {
+        res = false;
+    }
+    game_win = Mix_LoadMUS("sound/cat.mp3");
+    if( game_win == NULL)
     {
         res = false;
     }

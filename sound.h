@@ -9,6 +9,8 @@ using namespace std;
 
 extern Mix_Music* sound_background;
 extern Mix_Music* start_game;
+extern Mix_Music* game_win;
+
 
 
 extern Mix_Chunk* button_select_sound;

@@ -13,8 +13,8 @@
 class Mainloop
 {
     private:
-      Button *play_, *pause_, *quit_, *replay_ ,*level1_, *level2_, *level3_, *level4_,*level5_, *next_  ,*instructions;
-      TextObject *title , *you_win, *you_lose, *quit_intro;
+      Button *play_, *quit_,*level1_, *level2_, *level3_, *level4_,*level5_ ,*instructions , *replay , *menu ,*play_next , *exit;
+      TextObject  *quit_intro;
       Background back_ground;
       Play car;
       Map map, level1, level2, level3, level4, level5;
@@ -22,9 +22,19 @@ class Mainloop
     
       BaseObject bg_start;
       BaseObject instruc;
+      BaseObject game_over;
+      BaseObject level_up;
+      
+
       GameState game_state;
+
+      int tmp;
+
       SDL_Rect instruc_rect;
       SDL_Rect bg_start_rect;
+      SDL_Rect game_over_rect;
+      SDL_Rect level_up_rect;
+      
 
      
 

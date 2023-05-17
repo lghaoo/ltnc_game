@@ -36,9 +36,11 @@ using namespace std;
                     SDL_Point *center = NULL,
                     SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-       void free();
+      void free();
 
-       void setAlpha(Uint8 alpha);
+      
+
+      bool is_press(int mouse_x, int mouse_y);
 
 
        int getWidth();
@@ -79,8 +81,7 @@ enum FontType {
 
 extern TTF_Font *gFont[TOTAL_FONT];
 
-extern int gLevel;
-extern int gMenuID;
+
 
 
 

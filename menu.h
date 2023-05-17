@@ -38,9 +38,9 @@ class Button
 
   public:
     Button() {}
-    Button( std::string button_name, SDL_Rect _button_rect);
+    Button( std::string button_name, SDL_Rect _button_rect, std::string path);
 
-    void load_texture();
+    void load_texture(std::string path);
     bool is_press(int mouse_x, int mouse_y);
     void render();
     void free();

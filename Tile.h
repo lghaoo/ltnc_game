@@ -31,6 +31,37 @@ class Tile
         //Get the collision box
         SDL_Rect getBox();
 
+        bool get_x1() {return x1;}
+        bool get_x2() {return x2;}
+        bool get_x3() {return x3;}
+        bool get_x4() {return x4;}
+        bool get_x5() {return x5;}
+        bool get_x6() {return x6;}
+        bool get_x7() {return x7;}
+        bool get_x8() {return x8;}
+        bool get_x9() {return x9;}
+        bool get_x10() {return x10;}
+
+        void update_x1( bool x);
+        void update_x2( bool x);
+        void update_x3( bool x);
+        void update_x4( bool x);
+        void update_x5( bool x);
+        void update_x6( bool x);
+        void update_x7( bool x);
+        void update_x8( bool x);
+        void update_x9( bool x);
+        void update_x10(bool x);
+        
+
+        
+       
+        
+
+
+
+
+
     private:
         //The attributes of the tile
         SDL_Rect mBox;
@@ -39,6 +70,17 @@ class Tile
 
         //The tile type
         int mType;
+
+        bool x1 = false;
+        bool x2 = false;
+        bool x3 = false;
+        bool x4 = false;
+        bool x5 = false;
+        bool x6 = false;
+        bool x7 = false;
+        bool x8 = false;
+        bool x9 = false;
+        bool x10 = true;
 };
 
 bool touchesWall( SDL_Rect box, vector<Tile*> tiles);
