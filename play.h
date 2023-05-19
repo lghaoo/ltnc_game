@@ -24,7 +24,7 @@ class Play
 
       static const int PLAYER_WIDTH = 45;
       static const int PLAYER_HEIGHT = 45;
-      static const int PLAYER_SPEED = 20;
+      static const int PLAYER_SPEED = 10;
      
     void init(Map level);
 

@@ -267,7 +267,7 @@ void Mainloop::handle_event(SDL_Event event)
                 car.init(map);
                 
                 car.get_hp1(map);
-                //car.get_target(map.get_tile_set());
+                car.get_target(map.get_tile_set());
 
                 
             }
@@ -333,7 +333,7 @@ void Mainloop::handle_event(SDL_Event event)
                 }
                 else if(replay->is_press(x,y))
                 {
-                    update_game_state(PLAYING_THE_GAME);
+                    update_game_state(REPLAYING);
 
                 }
                 else if (menu->is_press(x,y))
@@ -395,6 +395,7 @@ void Mainloop::handle_event(SDL_Event event)
         car.get_hp1(map);
         car.get_target(map.get_tile_set());
        
+       
         update_game_state(PLAYING_THE_GAME);
     }
 
@@ -405,7 +406,9 @@ void Mainloop::handle_event(SDL_Event event)
         screen = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
         car.init(map);
         car.get_hp1(map);
+
          car.get_target(map.get_tile_set());
+        
        
         update_game_state(PLAYING_THE_GAME);
     }

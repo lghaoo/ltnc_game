@@ -611,7 +611,8 @@ bool Play::win()
 bool Play :: is_game_over()
 {
     bool res = false;
-    if (hp == 0 && !checkCollision(mBox,target)) res= true;
+    if (hp < 0  &&  (!checkCollision(mBox,target))) res= true;
+    
     return res;
 }
 
