@@ -20,8 +20,7 @@ enum GameState {
     WIN,
     GAME_OVER,
     NEXT,
-    
-    RESTARTING,
+    REPLAYING,
     CHOOSING_LEVEL
 };
 

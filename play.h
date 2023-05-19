@@ -39,13 +39,19 @@ class Play
     
   
     SDL_Rect get_target(vector<Tile*> tiles);
+    void getRoad(Map lelvel);
+    void getmap(std:: string path);
 
-   // void check_hp(vector<Tile*> tiles);
+    void check_hp(vector<Tile*> tiles);
 
-    bool is_game_over(SDL_Rect camera);
+    bool is_game_over();
 
     bool win();
-    int get_hp(Map level);
+    void get_hp(Map level);
+    void get_hp1(Map level);
+    void moveToOtherBox(int Box[11][11] , int x, int y);
+    void Init();
+    void Result();
     int getPosX();
     int getPosY();
    private:
@@ -63,7 +69,9 @@ class Play
 
     int hp;
 
-    //Tile status_x;
+    //Map level;
+
+    Tile status_x;
     
 };
 

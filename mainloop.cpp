@@ -265,7 +265,8 @@ void Mainloop::handle_event(SDL_Event event)
                     update_game_state(PLAYING_THE_GAME);
                 }
                 car.init(map);
-                car.get_hp(map);
+                
+                car.get_hp1(map);
                 car.get_target(map.get_tile_set());
 
                 
@@ -298,14 +299,14 @@ void Mainloop::handle_event(SDL_Event event)
                     {
                          map = level2;
                        
-                         update_game_state(PLAYING_THE_GAME);
+                         update_game_state(NEXT);
                     }
                         break;
                     case 2:
                     {
                         map = level3;
                       
-                         update_game_state(PLAYING_THE_GAME);
+                         update_game_state(NEXT);
 
                     } 
                         break;
@@ -313,14 +314,14 @@ void Mainloop::handle_event(SDL_Event event)
                     {
                          map = level4;
                       
-                          update_game_state(PLAYING_THE_GAME);
+                         update_game_state(NEXT);
                     }
                         break;
                     case 4: 
                     {
                         map = level5;
                      
-                         update_game_state(PLAYING_THE_GAME);
+                        update_game_state(NEXT);
                     }
 
                     break;
@@ -349,23 +350,23 @@ void Mainloop::handle_event(SDL_Event event)
 
             case GAME_OVER:
             {
-                // if(event.type == SDL_MOUSEBUTTONDOWN)
-                // {
-                //     int x, y;
-                //     SDL_GetMouseState(&x, &y);
-                //     if(replay.is_press(x,y))
-                //     {
-                //        update_game_state(PLAYING_THE_GAME);
+                if(event.type == SDL_MOUSEBUTTONDOWN)
+                {
+                    int x, y;
+                    SDL_GetMouseState(&x, &y);
+                    if(replay->is_press(x,y))
+                    {
+                       update_game_state(REPLAYING);
 
-                //      }
-                //     else if (menu.is_press(x,y))
-                //     {
-                //         update_game_state(CHOOSING_LEVEL);
-                //     }
-                //     else if (exit.is_press(x,y))
-                //     {
-                //         update_game_state(QUITTING_THE_GAME);
-                //     }
+                     }
+                    else if (menu->is_press(x,y))
+                    {
+                        update_game_state(CHOOSING_LEVEL);
+                    }
+                    else if (exit->is_press(x,y))
+                    {
+                        update_game_state(QUITTING_THE_GAME);
+                    }
                 // }
             }
 
@@ -380,10 +381,35 @@ void Mainloop::handle_event(SDL_Event event)
     if (game_state == PLAYING_THE_GAME)
     {
           car.move(map.get_tile_set(), map);
-         // car.check_hp(map.get_tile_set());
-          if(car.win()) update_game_state(WIN);
+         
+            car.check_hp(map.get_tile_set());
+            if ( car.is_game_over()) update_game_state(GAME_OVER);
+            else if(car.win()) update_game_state(WIN);
 
     }
+    if (game_state == NEXT)
+    {
+       
+        screen = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+        car.init(map);
+        car.get_hp1(map);
+        car.get_target(map.get_tile_set());
+       
+        update_game_state(PLAYING_THE_GAME);
+    }
+
+    }
+    if ( game_state == REPLAYING)
+    {
+        
+        screen = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+        car.init(map);
+        car.get_hp1(map);
+         car.get_target(map.get_tile_set());
+       
+        update_game_state(PLAYING_THE_GAME);
+    }
+    
 }
 
 GameState Mainloop::get_game_state()

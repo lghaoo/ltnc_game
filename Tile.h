@@ -20,6 +20,7 @@ class Tile
     public:
         //Initializes position and type
         Tile( int x, int y, int tileType );
+        Tile() {}
         ~Tile();
 
         //Shows the tile
@@ -31,6 +32,8 @@ class Tile
         //Get the collision box
         SDL_Rect getBox();
 
+       
+       
         bool get_x1() {return x1;}
         bool get_x2() {return x2;}
         bool get_x3() {return x3;}
@@ -52,7 +55,6 @@ class Tile
         void update_x8( bool x);
         void update_x9( bool x);
         void update_x10(bool x);
-        
 
         
        
@@ -71,7 +73,7 @@ class Tile
         //The tile type
         int mType;
 
-        bool x1 = false;
+         bool x1 = false;
         bool x2 = false;
         bool x3 = false;
         bool x4 = false;
@@ -81,6 +83,9 @@ class Tile
         bool x8 = false;
         bool x9 = false;
         bool x10 = true;
+   
+
+        
 };
 
 bool touchesWall( SDL_Rect box, vector<Tile*> tiles);
@@ -91,7 +96,8 @@ private:
     vector<Tile*> tile_set;
     SDL_Rect tile_clips[TOTAL_TILE_SPRITES];
     int level;
-    //int x1 = -1, x2 = -1,y1 = -1,y2 = -1;
+    //int box[11][11];
+   
 
     
     
@@ -103,8 +109,11 @@ public:
     vector<Tile*> get_tile_set() {return tile_set;};
     bool set_tiles(std::string file_path);
     void render(SDL_Rect& camera);
+
+    //void get_box {return box};
     
     int getLevel() ;
+    
     
 };
     
