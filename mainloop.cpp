@@ -14,7 +14,7 @@ Mainloop::Mainloop()
     tmp  = -1;
     screen = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
   
-    play_= new Button("PLay",{SCREEN_WIDTH/2 , SCREEN_HEIGHT/2 , 100, 80},"img/button0.png");
+    play_= new Button("Play",{SCREEN_WIDTH/2 , SCREEN_HEIGHT/2 , 100, 80},"img/button0.png");
     instructions = new  Button("Instructions",{SCREEN_WIDTH/2 , SCREEN_HEIGHT/2 +110, 130, 80},"img/button0.png");
     quit_= new Button("Quit",{SCREEN_WIDTH/2, SCREEN_HEIGHT/2+220,100,80}, "img/button0.png");
      
@@ -267,7 +267,7 @@ void Mainloop::handle_event(SDL_Event event)
                 car.init(map);
                 
                 car.get_hp1(map);
-                car.get_target(map.get_tile_set());
+                //car.get_target(map.get_tile_set());
 
                 
             }

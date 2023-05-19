@@ -24,7 +24,7 @@ class Play
 
       static const int PLAYER_WIDTH = 45;
       static const int PLAYER_HEIGHT = 45;
-      static const int PLAYER_SPEED = 5;
+      static const int PLAYER_SPEED = 20;
      
     void init(Map level);
 
@@ -71,7 +71,7 @@ class Play
 
     //Map level;
 
-    Tile status_x;
+    
     
 };
 

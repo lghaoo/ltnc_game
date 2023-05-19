@@ -451,50 +451,50 @@ void Play::check_hp(vector<Tile*> tiles )
     {  
         if (checkCollision(mBox, tile->getBox()))
         {
-           if (tile->getType() == 1 &&  status_x.get_x1() == false)
+           if (tile->getType() == 1 &&  tile->get_x1() == false)
             {
                 hp -= 1;
-                status_x.update_x1( true);
+                tile->update_x1( true);
             } 
-            else if (tile->getType() == 2 && status_x.get_x2() == false)
+            else if (tile->getType() == 2 && tile->get_x2() == false)
             {
                 hp += 3;
-                status_x.update_x2( true);
+                tile->update_x2( true);
             }
-            else if(tile->getType() == 3 && status_x.get_x3() == false)
+            else if(tile->getType() == 3 && tile->get_x3() == false)
             {
                  hp -= 5;
-                 status_x.update_x3( true);
+                 tile->update_x3( true);
             }
-            else if(tile->getType() == 4 && status_x.get_x4() == false)
+            else if(tile->getType() == 4 && tile->get_x4() == false)
             {
                 hp += 4;   
-                status_x.update_x4( true);
+                tile->update_x4( true);
             }
-            else if (tile->getType() == 5 && status_x.get_x5() == false)
+            else if (tile->getType() == 5 && tile->get_x5() == false)
             {
                 hp += 2;
-                status_x.update_x5( true);
+                tile->update_x5( true);
             }
-            else if (tile->getType() == 6 && status_x.get_x6() == false)
+            else if (tile->getType() == 6 && tile->get_x6() == false)
             {
                 hp -= 1;
-                status_x.update_x6( true);
+                tile->update_x6( true);
             }
-            else if (tile->getType() == 7 && status_x.get_x7() == false)
+            else if (tile->getType() == 7 && tile->get_x7() == false)
             {
                 hp -= 4;
-                status_x.update_x7( true);
+                tile->update_x7( true);
             }
-            else if (tile->getType() == 8 && status_x.get_x8() == false)
+            else if (tile->getType() == 8 && tile->get_x8() == false)
             {
                 hp -= 2;
-                status_x.update_x8( true);
+                tile->update_x8( true);
             }
-            else if (tile->getType() == 9 && status_x.get_x9() == false)
+            else if (tile->getType() == 9 && tile->get_x9() == false)
             {
                  hp -= 3;   
-                 status_x.update_x9( true);
+                 tile->update_x9( true);
             }
             // else if (tile->getType() == 10 && status_x.get_x10() == false)
             // {
