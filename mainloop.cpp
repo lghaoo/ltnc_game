@@ -101,6 +101,10 @@ void Mainloop::render_game()
     case WIN:
     {
 
+        back_ground.render();
+        level_up_rect = {200, 100,level_up.getWidth()*1.5,level_up.getHeight()*1.5};
+       
+        level_up.render(gRenderer,70,0,NULL,&level_up_rect);
 
         play_next= new Button("  ",{ 270, 430, 86,84},"img/play_next2.png");
 
@@ -108,16 +112,7 @@ void Mainloop::render_game()
 
         exit = new Button(" ",{430,435,55,70},"img/exit.png");
         
-        replay = new Button (" ",{270,420,76,84},"img/replay1.png");
-
-
-
-        back_ground.render();
-        level_up_rect = {200, 100,level_up.getWidth()*1.5,level_up.getHeight()*1.5};
-       
-        level_up.render(gRenderer,70,0,NULL,&level_up_rect);
-
-        
+        replay = new Button (" ",{270,420,76,84},"img/replay1.png"); 
 
        if ( tmp == 1 || tmp == 2 || tmp == 3 || tmp == 4)
        {
@@ -125,11 +120,10 @@ void Mainloop::render_game()
         menu->render();
         exit->render();
        
-      
        }
        else if ( tmp == 5)
        {
-        replay->render();
+       replay->render();
         menu->render();
         exit->render();
         
@@ -266,7 +260,7 @@ void Mainloop::handle_event(SDL_Event event)
                 }
                 car.init(map);
                 
-                car.get_hp1(map);
+                car.get_hp(map);
                 car.get_target(map.get_tile_set());
 
                 
@@ -336,7 +330,7 @@ void Mainloop::handle_event(SDL_Event event)
                     update_game_state(REPLAYING);
 
                 }
-                else if (menu->is_press(x,y))
+                 if (menu->is_press(x,y))
                 {
                     update_game_state(CHOOSING_LEVEL);
                 }
@@ -346,6 +340,7 @@ void Mainloop::handle_event(SDL_Event event)
                 }
 
             }
+        }
             break;
 
             case GAME_OVER:
@@ -367,51 +362,44 @@ void Mainloop::handle_event(SDL_Event event)
                     {
                         update_game_state(QUITTING_THE_GAME);
                     }
-                // }
-            }
+                }
+            } 
+            break;
+            case NEXT :
+             {
+                screen = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+                car.init(map);
+                car.get_hp(map);
+                car.get_target(map.get_tile_set());
+                update_game_state(PLAYING_THE_GAME);
 
+             }
+             break;
+             case REPLAYING:
+             {
+                screen = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+                car.init(map);
+                car.get_hp(map);
+                car.get_target(map.get_tile_set());
+                 update_game_state(PLAYING_THE_GAME);
 
-        }
-        break;
+             }
+             break;
         
-        default:
+           default:
             break;
         }
     }
     if (game_state == PLAYING_THE_GAME)
     {
-          car.move(map.get_tile_set(), map);
+           car.move(map.get_tile_set(), map);
          
             car.check_hp(map.get_tile_set());
             if ( car.is_game_over()) update_game_state(GAME_OVER);
             else if(car.win()) update_game_state(WIN);
 
     }
-    if (game_state == NEXT)
-    {
-       
-        screen = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-        car.init(map);
-        car.get_hp1(map);
-        car.get_target(map.get_tile_set());
-       
-       
-        update_game_state(PLAYING_THE_GAME);
-    }
-
-    }
-    if ( game_state == REPLAYING)
-    {
-        
-        screen = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-        car.init(map);
-        car.get_hp1(map);
-
-         car.get_target(map.get_tile_set());
-        
-       
-        update_game_state(PLAYING_THE_GAME);
-    }
+   
     
 }
 

@@ -7,28 +7,17 @@
 
 using namespace std;
 
-#define MAX 121
+// int n = 121;
 
-#define TRUE 1
-
-#define FALSE  0
-
-#define VOCUNG 1e9
-
-int n = 121;
-
-long long truoc[MAX];//mảng đánh dấu đường đi.
-
-long long d[MAX];//mảng đánh dấu khoảng cách.
-
-long long Matrix[MAX][MAX];//ma trận trọng số
-
-long long chuaxet[MAX];//mảng đánh dấu đỉnh đã được gán nhãn.
+int truoc[MAX];//mảng đánh dấu đường đi.
+int d[MAX];//mảng đánh dấu khoảng cách.
+int Matrix[MAX][MAX];//ma trận trọng số
+int chuaxet[MAX];//mảng đánh dấu đỉnh đã được gán nhãn.
 
 int Box[11][11];
-int s;//đỉnh đầu.
+// int s;//đỉnh đầu.
 
-int t;//đỉnh cuối
+// int t;//đỉnh cuối
 
 
 
@@ -189,131 +178,58 @@ void Play::move(vector<Tile*> tiles, Map level) {
 }
 
 
-void Play::getRoad(Map level)
-{
-    switch  (level.getLevel())
-    {
-    case 1 : getmap("map/map_level1.txt");
-        break;
-    case 2 : getmap("map/map_level2.txt");
-        break;
-    case 3 : getmap("map/map_level3.txt");
-        break;
-    case 4 : getmap("map/map_level4.txt");
-        break;
-    case 5 : getmap("map/map_level5.txt");
-        break;
-    
-    default:
-        break;
-    }
 
-}
- 
-void Play::getmap(string path)
-{
-    int a = 1;
-    int b= 1;
-    
-     bool load = true;
-    std::ifstream map( path.c_str() );
-    if( map.fail() )
-    {
-        printf( "Unable to load map map in  play file!\n" );
-        load = false;
-    }
-    else
-    {
-        int m;
-        while(map>>m)
-        {
-            if ( b > 11)
-            {
-                a += 1;
-                b = 1;
-            }
-            switch (m)
-            {
 
-            case 1: Box[a][b] = 1;
-            break;
-        case 0: Box[a][b] = 0;
-            break;
-        case 2: Box[a][b] = 0;
-            break;
-        case 3: Box[a][b] = 5;
-            break;
-        case 4: Box[a][b] = 0;
-            break;
-        case 5: Box[a][b] = 0;
-            break;
-        case 6 : Box[a][b] = 1;
-            break;
-        case 7 : Box[a][b] = 4;
-            break;
-        case 8 : Box[a][b] = 2;
-            break;
-        case 9 : Box[a][b] = 3;
-            break;
-        case 10 : Box[a][b] = 1;
-                break;
-            
-            default:
-                break;
-            }
-            b++;
-        }
-    
-     
-     
-        b++;
-    }
-    map.close();
-
-}
 
 void Play::moveToOtherBox(int Box[11][11] , int x, int y)
 {
     if(Box[x][y] == 0) return;
-    int up_1 = x - 1;
-    if(Box[up_1][y] != 0) 
+    if (x > 1)
     {
-        int i = x * 11 + y - 11;
-        int j = up_1 * 11 + y - 11;
-        Matrix[i][j] = Box[up_1][y];
+    int up_ = x - 1; 
+    if(Box[up_][y] != 0) 
+    {
+        int i = x * sqrt(n) + y - sqrt(n);
+        int j = up_ * sqrt(n) + y - sqrt(n);
+        Matrix[i][j] = Box[up_][y];
     }
-    int down_1 = x + 1;
-    if(Box[down_1][y] != 0) 
-    {
-        int i = x * 11 +y -11;
-        int j = down_1 * 11 + y -11;
-        Matrix[i][j] = Box[down_1][y];
     }
-    int left_1 = y - 1;
-    if(Box[x][left_1] != 0) 
+    if ( x < 11)
     {
-        int i = x * 11 + y - 11;
-        int j = x * 11 + left_1 -11;
-        Matrix[i][j] = Box[x][left_1];
+    int down_ = x + 1;
+   
+    if(Box[down_][y] != 0) 
+    {
+        int i = x * sqrt(n) +y - sqrt(n);
+        int j = down_ * sqrt(n) + y - sqrt(n);
+        Matrix[i][j] = Box[down_][y];
     }
-
-    int right_1 =  y + 1;
-    if(Box[x][right_1] != 0) 
+    }
+    if ( y > 1)
     {
-        int i = x * 11 + y - 11;
-        int j = x * 11 + right_1 - 11;
-        Matrix[i][j] = Box[x][right_1];
+    int left_ = y - 1;
+    if(Box[x][left_] != 0) 
+    {
+        int i = x * sqrt(n) + y - sqrt(n);
+        int j = x * sqrt(n) + left_ - sqrt(n);
+        Matrix[i][j] = Box[x][left_];
+    }
+    }
+    if ( y < 11)
+    {
+    int right_ =  y + 1;
+   
+    if(Box[x][right_] != 0) 
+    {
+        int i = x * sqrt(n) + y - sqrt(n);
+        int j = x * sqrt(n) + right_ - sqrt(n);
+        Matrix[i][j] = Box[x][right_];
+    }
     }
 }
 
+void Play::Floyd(){
 
-void Play::Init(){
-
-
- 
- //nhập đỉnh đầu và đỉnh cuối của đồ thị.
-
- //nhập ma trận của đồ thị.
  for (int i = 1; i <= n; i++){
   for (int j = 1; j <= n; j++){
     Matrix[i][j] = VOCUNG;
@@ -330,119 +246,22 @@ void Play::Init(){
 
     }
  }
- for (int i = 1 ; i <= 11 ; i++)
- {
-    for (int j = 1 ; j <= 11;j++)
+ for (int k = 1; k <= n; k++)
     {
-        cout << Box[i][j]<<' ';
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j <= n; j++)
+            {
+            	if((Matrix[i][j] >  Matrix[i][k] + Matrix[k][j]) && (Matrix[i][k] != VOCUNG) && (Matrix[k][j] != VOCUNG))
+                {
+            		Matrix[i][j] = Matrix[i][k] + Matrix[k][j];
+                }
+            }
+        }
     }
-    cout <<endl;
- }
- 
-//  for (int i = 1; i <= n; i++){
-//   for (int j = 1; j <= n; j++){
-//     if (Matrix[i][j] > 1000) Matrix[i][j] = VOCUNG;
-//     if ( Matrix[i][j] == VOCUNG)
-//       cout <<0<<' ';
-//     else cout <<Matrix[i][j]<<' ';
-
-//   }
-//   cout <<endl;
-//  }
-
+    hp = Matrix[s][t];
 
 }
-
-void Play::Result(){
-
- cout<<"Duong di ngan nhat tu "<<s<<" den "<<t << " la"<<endl;
-
- cout<<t <<"<=";//in đỉnh cuối dưới dạng char.
-
- int i = truoc[t];
-
- while (i != s){
-
-  cout<<i<<"<=";//in ra kết quả dưới dạng char.
-
-  i = truoc[i];
-
- }
-
- cout<<s;//in đỉnh đầu dưới dạng char.
-
- cout<<endl<<"Do dai duong di la : "<< d[t];
- hp = d[t];
-
-}
-
-void Dijkstra(){
-
- int u, minp;
-
- //khởi tạo nhãn tạm thời cho các đỉnh.
-
- for (int v = 1; v <= n; v++){
-
-  d[v] = Matrix[s][v];
-
-  truoc[v] = s;
-
-  chuaxet[v] = FALSE;
-
- }
-
- truoc[s] = 0;
-
- d[s] = 0;
-
- chuaxet[s] = TRUE;
-
- //bươc lặp
-
- while (!chuaxet[t]) {
-
-  minp = VOCUNG;
-
-  //tìm đỉnh u sao cho d[u] là nhỏ nhất
-
-  for (int v = 1; v <= n; v++){
-
-   if ((!chuaxet[v]) && (minp > d[v])){
-
-    u = v;
-
-    minp = d[v];
-
-   }
-
-  }
-
-  chuaxet[u] = TRUE;// u la dinh co nhan tam thoi nho nhat
-
-  if (!chuaxet[t]){
-
-   //gán nhãn lại cho các đỉnh.
-
-   for (int v = 1; v <= n; v++){
-
-    if ((!chuaxet[v]) && (d[u] + Matrix[u][v] < d[v])){
-
-     d[v] = d[u] + Matrix[u][v];
-
-     truoc[v] = u;
-
-    }
-
-   }
-
-  }
-
- }
-
-}
-
-
 
 
 void Play::check_hp(vector<Tile*> tiles )
@@ -511,17 +330,20 @@ void Play::check_hp(vector<Tile*> tiles )
 
 void Play::get_hp(Map newlevel)
 {
+    // std::string path;
     switch (newlevel.getLevel())
  {
  case 1:
  {
+    path = "map/map_level1.txt";
     s = 111;
     t = 21;
-
+    
  }
     break;
 case 2:
  {
+    path = "map/map_level2.txt";
     s = 8;
     t = 113;
 
@@ -529,6 +351,7 @@ case 2:
     break;
 case 3:
  {
+    path = "map/map_level3.txt";
     s = 116;
     t = 17;
 
@@ -536,54 +359,84 @@ case 3:
     break;
 case 4:
  {
+    path = "map/map_level4.txt";
     s = 55;
     t = 45;
+   
 
  }
     break;
 case 5:
  {
+    path = "map/map_level5.txt";
     s = 17;
     t = 72;
-
  }
     break;
  default:
     break;
  }
-    Init();
-    Dijkstra();
-    Result();
+      int a = 1;
+      int b = 1;
+     bool load = true;
+     std::ifstream map(path.c_str() );
+    if( map.fail() )
+    {
+        printf( "Unable to load map map in  play file!\n" );
+        load = false;
+    }
+    else
+    {
+       
+        int m = -1;
+        while(map>>m)
+        {
+            if ( b > 11)
+            {
+                a += 1;
+                b = 1;
+            }
+            switch (m)
+            {
+
+            case 1: Box[a][b] = 1;
+            break;
+            case 0: Box[a][b] = 0;
+            break;
+            case 2: Box[a][b] = 0;
+            break;
+            case 3: Box[a][b] = 5;
+            break;
+            case 4: Box[a][b] = 0;
+            break;
+            case 5: Box[a][b] = 0;
+            break;
+            case 6 : Box[a][b] = 1;
+            break;
+            case 7 : Box[a][b] = 4;
+            break;
+            case 8 : Box[a][b] = 2;
+            break;
+            case 9 : Box[a][b] = 3;
+            break;
+            case 10 : Box[a][b] = 1;
+                break;
+            
+            default:
+                break;
+            }
+            b++;
+        }
     
+    }
+    map.close();
+
+    Floyd();
+    // Dijkstra();
+    // Result();
    
 }
 
-void Play::get_hp1(Map level)
-{
-    
-   switch (level.getLevel())
-    {
-    case 1:
-        hp = 23;
-        break;
-    case 2:
-        hp = 23;
-        break;
-    case 3:
-        hp = 17;
-        break;
-    case 4:
-        hp = 20;
-        break;
-    case 5:
-        hp = 23;
-        break;
-    
-    
-    default:
-        break;
-    }
-}
 
 
 SDL_Rect Play::get_target(vector<Tile*>tiles)
@@ -611,7 +464,7 @@ bool Play::win()
 bool Play :: is_game_over()
 {
     bool res = false;
-    if (hp < 0  &&  (!checkCollision(mBox,target))) res= true;
+    if (hp <= 0  &&  (!checkCollision(mBox,target))) res= true;
     
     return res;
 }

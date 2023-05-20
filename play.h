@@ -7,6 +7,14 @@
 #include "menu.h"
 
 
+#define MAX 121
+
+#define TRUE 1
+
+#define FALSE  0
+
+#define VOCUNG 1e9
+
 class Play
 {
    
@@ -24,7 +32,7 @@ class Play
 
       static const int PLAYER_WIDTH = 45;
       static const int PLAYER_HEIGHT = 45;
-      static const int PLAYER_SPEED = 10;
+      static const int PLAYER_SPEED = 5;
      
     void init(Map level);
 
@@ -39,8 +47,7 @@ class Play
     
   
     SDL_Rect get_target(vector<Tile*> tiles);
-    void getRoad(Map lelvel);
-    void getmap(std:: string path);
+   
 
     void check_hp(vector<Tile*> tiles);
 
@@ -48,10 +55,11 @@ class Play
 
     bool win();
     void get_hp(Map level);
-    void get_hp1(Map level);
+   
     void moveToOtherBox(int Box[11][11] , int x, int y);
-    void Init();
-    void Result();
+    void Floyd();
+    // void Result();
+    // void Dijkstra();
     int getPosX();
     int getPosY();
    private:
@@ -69,7 +77,12 @@ class Play
 
     int hp;
 
-    //Map level;
+    int s;//đỉnh đầu.
+
+    int t; 
+    std::string path;
+    int n = 121;
+    
 
     
     
